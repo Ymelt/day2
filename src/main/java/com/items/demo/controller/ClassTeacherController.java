@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/teacher")
 public class ClassTeacherController {
-    @Autowired
-    private ClassTeacherService classTeacherService;
-
-    @RequestMapping("/page")
-    public IPage<ClassTeacher> findPage(@RequestParam Integer pageNum,
-                                        @RequestParam Integer pageSize,
-                                        @RequestParam(defaultValue = "") String gradeNumber,
-                                        @RequestParam(defaultValue = "") String classNumber){
-        IPage<ClassTeacher> page = new Page<>(pageNum,pageSize);
-        QueryWrapper<ClassTeacher> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("grade_number",gradeNumber);
-        queryWrapper.like("the_class_number",classNumber);
-        return classTeacherService.page(page,queryWrapper);
-    }
-
-
-    @RequestMapping("save")
-    public Result save(@RequestBody ClassTeacher classTeacher){
-        if(classTeacherService.saveOrUpdate(classTeacher)){
-            return Result.success(classTeacher);
-        }
-        return Result.error();
-    }
+//    @Autowired
+//    private ClassTeacherService classTeacherService;
+//
+//    @RequestMapping("/page")
+//    public IPage<ClassTeacher> findPage(@RequestParam Integer pageNum,
+//                                        @RequestParam Integer pageSize,
+//                                        @RequestParam(defaultValue = "") String gradeNumber,
+//                                        @RequestParam(defaultValue = "") String classNumber){
+//        IPage<ClassTeacher> page = new Page<>(pageNum,pageSize);
+//        QueryWrapper<ClassTeacher> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like("grade_number",gradeNumber);
+//        queryWrapper.like("the_class_number",classNumber);
+//        return classTeacherService.page(page,queryWrapper);
+//    }
+//
+//
+//    @RequestMapping("save")
+//    public Result save(@RequestBody ClassTeacher classTeacher){
+//        if(classTeacherService.saveOrUpdate(classTeacher)){
+//            return Result.success(classTeacher);
+//        }
+//        return Result.error();
+//    }
 
 }

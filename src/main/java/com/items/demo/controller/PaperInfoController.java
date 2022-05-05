@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/info")
 public class PaperInfoController {
-    @Autowired
-    private PaperInfoService paperInfoService;
-
-    @RequestMapping("save")
-    public boolean save(@RequestBody PaperInfo paperInfo){
-        return paperInfoService.save(paperInfo);
-    }
-
-    /**
-     * 分页查询
-     * @param pageNum
-     * @param pageSize
-     * @return
-     */
-    @RequestMapping("/page")
-    public IPage<PaperInfo> findPage(@RequestParam Integer pageNum,
-                                     @RequestParam Integer pageSize){
-        IPage<PaperInfo> page = new Page<>(pageNum,pageSize);
-        QueryWrapper<PaperInfo> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.like("course_name",courseName);
-        return paperInfoService.page(page,queryWrapper);
-    }
+//    @Autowired
+//    private PaperInfoService paperInfoService;
+//
+//    @RequestMapping("save")
+//    public boolean save(@RequestBody PaperInfo paperInfo){
+//        return paperInfoService.save(paperInfo);
+//    }
+//
+//    /**
+//     * 分页查询
+//     * @param pageNum
+//     * @param pageSize
+//     * @return
+//     */
+//    @RequestMapping("/page")
+//    public IPage<PaperInfo> findPage(@RequestParam Integer pageNum,
+//                                     @RequestParam Integer pageSize){
+//        IPage<PaperInfo> page = new Page<>(pageNum,pageSize);
+//        QueryWrapper<PaperInfo> queryWrapper = new QueryWrapper<>();
+////        queryWrapper.like("course_name",courseName);
+//        return paperInfoService.page(page,queryWrapper);
+//    }
 }

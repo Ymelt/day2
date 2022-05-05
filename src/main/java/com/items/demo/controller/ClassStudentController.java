@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/student")
 public class ClassStudentController {
-    @Autowired
-    private ClassStudentService classStudentService;
-
-    @RequestMapping("/page")
-    public IPage<ClassStudent> findPage(@RequestParam Integer pageNum,
-                                        @RequestParam Integer pageSize,
-                                        @RequestParam(defaultValue = "") String studentName){
-        IPage<ClassStudent> page = new Page<>(pageNum,pageSize);
-        QueryWrapper<ClassStudent> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("student_name",studentName);
-        return classStudentService.page(page,queryWrapper);
-    }
+//    @Autowired
+//    private ClassStudentService classStudentService;
+//
+//    @RequestMapping("/page")
+//    public IPage<ClassStudent> findPage(@RequestParam Integer pageNum,
+//                                        @RequestParam Integer pageSize,
+//                                        @RequestParam(defaultValue = "") String studentName){
+//        IPage<ClassStudent> page = new Page<>(pageNum,pageSize);
+//        QueryWrapper<ClassStudent> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like("student_name",studentName);
+//        return classStudentService.page(page,queryWrapper);
+//    }
 
 
 }

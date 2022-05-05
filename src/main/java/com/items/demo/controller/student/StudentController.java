@@ -19,28 +19,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/atStudent")
 public class StudentController {
 
-    @Autowired
+    @Resource
     private PaperStudentService paperStudentService;
 
-    @Autowired
+    @Resource
     private PaperInfoService paperInfoService;
 
-    @Autowired
+    @Resource
     private PaperContentMapper paperContentMapper;
 
-    @Autowired
+    @Resource
     private PaperInfoMapper paperInfoMapper;
 
-    @Autowired
+    @Resource
     private AnswerVoMapper answerVoMapper;
 
-    @Autowired
+    @Resource
     private PaperStudentMapper paperStudentMapper;
 
     @RequestMapping("/save")

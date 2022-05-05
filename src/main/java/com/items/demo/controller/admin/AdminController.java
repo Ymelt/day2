@@ -24,31 +24,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
+    @Resource
     private ClassStudentService classStudentService;
 
-    @Autowired
+    @Resource
     private ClassTeacherService classTeacherService;
 
-    @Autowired
+    @Resource
     private CourseService courseService;
 
-    @Autowired
+    @Resource
     private CourseMapper courseMapper;
 
-    @Autowired
+    @Resource
     private CourseVoMapper courseVoMapper;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
 

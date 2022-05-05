@@ -12,12 +12,13 @@ import com.items.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class LoginStudentInterceptor {
+public class LoginStudentInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 

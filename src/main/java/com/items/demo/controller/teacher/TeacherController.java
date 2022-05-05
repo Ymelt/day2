@@ -11,6 +11,7 @@ import com.items.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
@@ -19,37 +20,37 @@ public class TeacherController {
     /**
      * content
      */
-    @Autowired
+    @Resource
     private PaperContentService paperContentService;
 
-    @Autowired
+    @Resource
     private PaperContentMapper paperContentMapper;
 
-    @Autowired
+    @Resource
     private PaperStudentService paperStudentService;
 
-    @Autowired
+    @Resource
     private PaperInfoService paperInfoService;
 
-    @Autowired
+    @Resource
     private ClassStudentMapper classStudentMapper;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private ClassStudentService classStudentService;
 
-    @Autowired
+    @Resource
     private ClassTeacherMapper classTeacherMapper;
 
-    @Autowired
+    @Resource
     private PaperInfoMapper paperInfoMapper;
 
-    @Autowired
+    @Resource
     private PaperChoiceService paperChoiceService;
 
-    @Autowired
+    @Resource
     private PaperChoiceMapper paperChoiceMapper;
 
 

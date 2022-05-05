@@ -10,6 +10,7 @@ import com.items.demo.entity.Course;
 import com.items.demo.entity.User;
 import com.items.demo.mapper.UserMapper;
 import com.items.demo.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +21,10 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @RequestMapping("/save")
@@ -50,6 +51,8 @@ public class UserController {
         }
 
     }
+
+
 
     @RequestMapping("/login")
     public Result login(@RequestBody User user){

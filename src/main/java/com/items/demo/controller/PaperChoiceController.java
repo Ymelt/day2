@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/choice")
 public class PaperChoiceController {
-    @Autowired
-    private PaperChoiceService paperChoiceService;
-
-    @RequestMapping("test")
-    public boolean save(@RequestBody PaperChoice paperChoice){
-        return paperChoiceService.save(paperChoice);
-    }
+//    @Autowired
+//    private PaperChoiceService paperChoiceService;
+//
+//    @RequestMapping("test")
+//    public boolean save(@RequestBody PaperChoice paperChoice){
+//        return paperChoiceService.save(paperChoice);
+//    }
 }

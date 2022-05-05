@@ -12,4 +12,9 @@
         WHERE r.role = '学生'
         AND s.student_name IS NULL
     </select>
+    <delete id ="deleteTest" >
+         DELETE
+         FROM sys_account_role r
+         WHERE  r.name= #{name}
+    </delete>
 </mapper>

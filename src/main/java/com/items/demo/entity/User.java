@@ -1,11 +1,15 @@
 package com.items.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @TableName("sys_account_role")
 public class User {
     @TableId(type = IdType.AUTO)
@@ -19,9 +23,15 @@ public class User {
 
     private String role;
 
-    private int createTime;
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    private long createTime;
 
-    private int updateTime;
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private long updateTime;
 
-    private int deleteTime;
+    private long deleteTime;
+
+    @TableLogic //用来逻辑删除
+    @TableField(fill = FieldFill.INSERT) //自动填充的注解
+    private int deleted;
 }
