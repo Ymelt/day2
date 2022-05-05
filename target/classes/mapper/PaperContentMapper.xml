@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.PaperContentMapper">
+
+    <select id="allTitle"  resultType="com.items.demo.entity.vo.ContentVo">
+        SELECT t.*,c.paper_title_option,c.paper_option_content
+        FROM paper_content t LEFT JOIN paper_choice c
+        ON t.paper_id = c.paper_id AND t.paper_title_id = c.paper_title_id
+    </select>
+    <select id="allModule"  resultType="com.items.demo.entity.PaperContent">
+        SELECT DISTINCT paper_module
+        FROM paper_content
+        where paper_id = #{paperId}
+    </select>
+    <select id="titleIn" resultType="com.items.demo.entity.PaperContent">
+        SELECT *
+        FROM paper_content
+        where paper_module = #{module1}
+    </select>
+    <select id="onlyModule" resultType="java.lang.String">
+        SELECT DISTINCT paper_module
+        FROM paper_content
+    </select>
+<!--    <select id="titleInModule" resultType="com.items.demo.entity.PaperContent">-->
+<!--        SELECT paper_title_id,paper_title_type,paper_title,paper_title_answer-->
+<!--        FROM paper_content-->
+<!--        WHERE paper_module = #{module2}-->
+<!--    </select>-->
+    <select id="findChoices" resultType="com.items.demo.entity.PaperChoice">
+        SELECT c.*
+        FROM  paper_choice c
+        WHERE  c.paper_id  = #{paperId}
+        AND c.paper_title_id = #{titleId}
+        ORDER BY paper_title_option ASC
+    </select>
+    <delete id="delModule">
+        DELETE
+        FROM paper_content
+        WHERE paper_module = #{module2}
+    </delete>
+    <delete id="delModule2">
+        DELETE
+        FROM paper_choice
+        WHERE paper_module = #{module3}
+    </delete>
+</mapper>

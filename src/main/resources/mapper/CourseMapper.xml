@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.CourseMapper">
+
+    <select id ="selectMyPage" resultType="com.items.demo.entity.Course">
+        select distinct course_name from sys_course  ${ew.customSqlSegment}
+
+    </select>
+    <delete id ="deleteCourse"  >
+        delete from sys_course where course_name = #{courseName}
+    </delete>
+    <select id="checkTeacher" resultType="java.lang.String">
+        select course_teacher from sys_course where course_name = #{courseName}
+    </select>
+    <delete id ="deleteClassCourse"  >
+        delete from sys_class_teacher where class_course = #{courseName2}
+    </delete>
+    <update id="saveOnlyTeacher">
+        update sys_course set course_teacher = #{teacherName3} where course_name = #{courseName3}
+    </update>
+    <update id="saveOnlyTeach">
+        update sys_course set course_name = #{courseName5} where course_teacher = #{teacherName5}
+    </update>
+    <select id = "selectThisCourse"  resultType="java.lang.Integer">
+        select count(*) from sys_course where course_name = #{courseName4}
+    </select>
+    <update id="removeThisTeacher">
+        update sys_course set course_teacher = '未安排' where id = #{id1}
+    </update>
+    <select id = "countFree"  resultType="java.lang.Integer">
+        select count(*) from sys_course where course_teacher = #{teacherName6}
+    </select>
+    <select id ="onlyCourse" resultType="com.items.demo.entity.Course">
+        select distinct course_name from sys_course
+    </select>
+    <select id ="arranged" resultType="com.items.demo.entity.Course">
+        select * from sys_course where course_teacher != '未安排'
+    </select>
+</mapper>

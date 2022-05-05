@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.CourseVoMapper">
+
+    <select id ="selectTeacher" resultType="com.items.demo.entity.vo.CourseVo">
+        select r.name,c.course_name
+        from sys_account_role r left join sys_course c on r.name = c.course_teacher
+        where r.role = '老师'
+        and r.name like concat('%',#{tName},'%')
+          ${ew.customSqlSegment}
+    </select>
+    <select id ="selectFreeTeacher" resultType="com.items.demo.entity.vo.CourseVo">
+
+        select s.name
+        from(select r.name,c.course_name
+        from sys_account_role r left join sys_course c on r.name = c.course_teacher
+        where r.role = '老师') s
+        where s.course_name is null
+
+          ${ew.customSqlSegment}
+    </select>
+    <select id = "findFreeTeacher"  resultType="com.items.demo.entity.vo.CourseVo">
+        select s.name
+        from(select r.name,c.course_name
+        from sys_account_role r left join sys_course c on r.name = c.course_teacher
+        where r.role = '老师') s
+        where s.course_name is null
+
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.PaperInfoMapper">
+    <select id="findId" resultType="java.lang.String">
+        SELECT paper_id
+        FROM paper_info
+        WHERE paper_course = #{courseName}
+    </select>
+    <select id="findIdForStu" resultType="java.lang.String">
+        SELECT i.paper_id
+        FROM paper_info i ,(
+        SELECT s.grade_number,s.the_class_number
+        FROM sys_account_role r , sys_class_student s
+        WHERE r.name = s.student_name
+        AND r.name = #{name}
+        )s
+        WHERE i.paper_apply_grade = s.grade_number
+        AND i.paper_apply_class = s.the_class_number
+    </select>
+</mapper>

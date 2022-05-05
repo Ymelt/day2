@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.UserMapper">
+    <select id ="selectAllTeacher" resultType="com.items.demo.entity.User">
+        select * from sys_account_role where role = '老师'
+    </select>
+    <select id="selectFreeStudent" resultType="java.lang.String">
+        SELECT r.name
+        FROM sys_account_role r LEFT JOIN sys_class_student s
+        ON r.name = s.student_name
+        WHERE r.role = '学生'
+        AND s.student_name IS NULL
+    </select>
+</mapper>

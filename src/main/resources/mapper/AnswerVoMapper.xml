@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.AnswerVoMapper">
+    <select id ="studentAnswerShell" resultType="com.items.demo.entity.vo.AnswerVo">
+        SELECT c.* ,s.paper_student_answer,s.paper_judge
+        FROM paper_content c LEFT JOIN paper_student s
+        ON c.paper_id = s.paper_id
+        AND c.paper_title_id = s.paper_title_id
+        where c.paper_module = #{module}
+        AND c.paper_id = #{paperId}
+        order by c.paper_title_id asc
+    </select>
+    <select id="anyThis" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM paper_student
+        WHERE paper_title_id = #{titleId}
+    </select>
+    <update id="judge">
+        UPDATE paper_student a ,(
+        SELECT  c.paper_id,c.paper_title_id,
+            CASE
+            WHEN s.paper_student_answer = c.paper_title_answer
+            THEN 'true'
+            ELSE 'false'
+            END AS 'result'
+        FROM paper_student s ,paper_content c
+        WHERE s.paper_id = c.paper_id
+        AND s.paper_title_id = c.paper_title_id) t
+        SET a.paper_judge = t.result
+        WHERE a.paper_title_id = t.paper_title_id
+        AND a.paper_id = t.paper_id
+    </update>
+    <select id ="shellHistory" resultType="com.items.demo.entity.vo.AnswerVo">
+        SELECT c.* ,s.paper_student_answer,s.paper_judge
+        FROM paper_content c LEFT JOIN paper_student s
+        ON c.paper_id = s.paper_id
+        AND c.paper_title_id = s.paper_title_id
+        WHERE c.paper_id = #{paperId}
+        ORDER BY paper_title_id ASC
+    </select>
+</mapper>

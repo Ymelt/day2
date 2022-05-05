@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.PaperStudentMapper">
+    <delete id="deleteFirst">
+        DELETE
+        FROM paper_student
+        WHERE paper_title_id = #{titleId}
+    </delete>
+    <select id="findIds" resultType="java.lang.String">
+        SELECT DISTINCT paper_id
+        FROM paper_student
+        WHERE paper_student = #{studentName}
+    </select>
+
+</mapper>

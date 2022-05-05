@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.items.demo.mapper.ClassStudentMapper">
+
+    <select id="selectMyStudent" resultType="com.items.demo.entity.ClassStudent">
+        SELECT s.*
+        FROM sys_class_student s JOIN
+        (SELECT grade_number,the_class_number
+        FROM sys_class_teacher
+        WHERE course_teacher = #{teacherName}) t
+        ON s.grade_number = t.grade_number
+        AND s.the_class_number = t.the_class_number
+        ${ew.customSqlSegment}
+    </select>
+</mapper>
