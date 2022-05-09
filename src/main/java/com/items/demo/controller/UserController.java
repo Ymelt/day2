@@ -15,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -109,5 +112,21 @@ public class UserController {
         queryWrapper.eq("account", username);
         User user = userService.getOne(queryWrapper);
         return Result.success(user);
+    }
+
+
+    /**
+     * 测试list返回
+     */
+    @RequestMapping("/listTest")
+    public Result listTest(){
+        List<User> userList = new ArrayList<>();
+        userList = userService.list();
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("count",userList.size());
+        map1.put("list",userList);
+        System.out.println("***********************");
+        System.out.println(map1);
+        return new Result("200","成功返回",map1);
     }
 }

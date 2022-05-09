@@ -18,6 +18,7 @@ import com.items.demo.service.ClassStudentService;
 import com.items.demo.service.ClassTeacherService;
 import com.items.demo.service.CourseService;
 import com.items.demo.service.UserService;
+import com.items.demo.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -344,5 +345,26 @@ public class AdminController {
         queryWrapper.eq("account", username);
         User user = userService.getOne(queryWrapper);
         return Result.success(user);
+    }
+
+    /**
+     * 保存欲新增的年级段与班级
+     */
+    @RequestMapping("/saveGrade")
+    public Result saveGrade(@RequestBody ClassTeacher classTeacher){
+
+        if (StrUtil.isBlank(classTeacher.getTheClassNumber()) || StrUtil.isBlank(classTeacher.getGradeNumber())) {
+            return Result.error(Constants.CODE_400, "填入参数为空");
+        }
+        return classTeacherService.saveGrade(classTeacher);
+    }
+
+
+    /**
+     * 找出能上课的课程
+     */
+    @RequestMapping("/findArranged")
+    public Result findArranged(){
+        return courseService.findArranged();
     }
 }

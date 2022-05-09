@@ -1,8 +1,6 @@
 package com.items.demo.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 @Data
@@ -22,4 +20,10 @@ public class PaperContent {
     private String paperTitle;
 
     private String paperTitleAnswer;
+
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    private long createTime;
+
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private long updateTime;
 }

@@ -26,11 +26,11 @@ public class WebMVCConfig implements WebMvcConfigurer {
 //                .addPathPatterns("/admin/**");
 
 
-        registry.addInterceptor(loginTeacherInterceptor)
-                .addPathPatterns("/atTeacher/**");
-
-        registry.addInterceptor(loginStudentInterceptor)
-                .addPathPatterns("/atStudent/**");
+//        registry.addInterceptor(loginTeacherInterceptor)
+//                .addPathPatterns("/atTeacher/**");
+//
+//        registry.addInterceptor(loginStudentInterceptor)
+//                .addPathPatterns("/atStudent/**");
 
 //        .excludePathPatterns("/user/login")
 //                .excludePathPatterns("/user/save");

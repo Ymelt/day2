@@ -89,4 +89,11 @@ public class CourseService extends ServiceImpl<CourseMapper, Course> {
             }
         }
     }
+
+    /**
+     * 找出能上课的课程
+     */
+    public Result findArranged(){
+        return Result.success(courseMapper.arranged());
+    }
 }
