@@ -18,8 +18,6 @@ import com.items.demo.service.ClassStudentService;
 import com.items.demo.service.ClassTeacherService;
 import com.items.demo.service.CourseService;
 import com.items.demo.service.UserService;
-import com.items.demo.utils.TokenUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,9 +55,13 @@ public class AdminController {
     @RequestMapping("/student/page")
     public IPage<ClassStudent> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,
+                                        @RequestParam(defaultValue = "") String gradeNumber,
+                                        @RequestParam(defaultValue = "") String classNumber,
                                         @RequestParam(defaultValue = "") String studentName){
         IPage<ClassStudent> page = new Page<>(pageNum,pageSize);
         QueryWrapper<ClassStudent> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("grade_number",gradeNumber);
+        queryWrapper.like("the_class_number",classNumber);
         queryWrapper.like("student_name",studentName);
         return classStudentService.page(page,queryWrapper);
     }
@@ -69,16 +71,20 @@ public class AdminController {
      * classteacher
      */
 
-
     @RequestMapping("/teacher/page")
     public IPage<ClassTeacher> findPage(@RequestParam Integer pageNum,
                                         @RequestParam Integer pageSize,
                                         @RequestParam(defaultValue = "") String gradeNumber,
-                                        @RequestParam(defaultValue = "") String classNumber){
+                                        @RequestParam(defaultValue = "") String classNumber,
+                                        @RequestParam(defaultValue = "") String course,
+                                        @RequestParam(defaultValue = "") String teacherName){
         IPage<ClassTeacher> page = new Page<>(pageNum,pageSize);
         QueryWrapper<ClassTeacher> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("grade_number",gradeNumber);
         queryWrapper.like("the_class_number",classNumber);
+        queryWrapper.like("class_course",course);
+        queryWrapper.like("course_teacher",teacherName);
+
         return classTeacherService.page(page,queryWrapper);
     }
 
@@ -313,6 +319,18 @@ public class AdminController {
         return userService.page(page,queryWrapper);
     }
 
+    @RequestMapping("/user/allStudents")
+    public IPage<User> findAllStudents(@RequestParam Integer pageNum,
+                                       @RequestParam Integer pageSize,
+                                       @RequestParam(defaultValue = "") String studentName  ){
+        IPage<User> page = new Page<>(pageNum,pageSize);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("role","学生");
+        queryWrapper.like("name",studentName);
+
+        return userService.page(page,queryWrapper);
+    }
+
     /**
      * 找到所有的老师
      * @return
@@ -366,5 +384,37 @@ public class AdminController {
     @RequestMapping("/findArranged")
     public Result findArranged(){
         return courseService.findArranged();
+    }
+
+    /**
+     * 安排班级的授课情况
+     */
+    @RequestMapping("/setCourse")
+    public Result arrangeCourse(@RequestBody ClassTeacher classTeacher){
+        if(classTeacherService.saveOrUpdate(classTeacher)){
+            return Result.success(classTeacher);
+        }else{
+            return Result.error();
+        }
+    }
+
+    /**
+     * 找出所有空闲的学生
+     */
+    @RequestMapping("/findFreeStudent")
+    public Result findFreeStudent(){
+        return Result.success(userMapper.selectFreeStudent());
+    }
+
+    /**
+     * 删除学生
+     */
+    @RequestMapping("/deleteStudent")
+    public Result deleteStudent(@RequestParam Integer id){
+        if(classStudentService.removeById(id)){
+            return Result.success();
+        }else{
+            return Result.error();
+        }
     }
 }

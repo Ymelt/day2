@@ -14,4 +14,8 @@
         FROM sys_class_teacher
         WHERE course_teacher = #{teacherName}
     </select>
+    <select id="selectGrade" resultType="com.items.demo.entity.ClassTeacher">
+        select distinct grade_number,the_class_number
+        from sys_class_teacher
+    </select>
 </mapper>

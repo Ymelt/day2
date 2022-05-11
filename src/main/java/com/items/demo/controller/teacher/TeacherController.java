@@ -143,6 +143,15 @@ public class TeacherController {
         return paperInfoService.page(page,queryWrapper);
     }
 
+
+    @RequestMapping("/info/update")
+    public Result updateInfo(@RequestBody PaperInfo paperInfo){
+        if(paperInfoService.saveOrUpdate(paperInfo)){
+            return Result.success(paperInfo);
+        }else{
+            return Result.error();
+        }
+    }
     /**
      * paperStudent
      */

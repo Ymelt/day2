@@ -17,6 +17,8 @@ public class PaperInfo {
 
     private String paperAuthor;
 
+    private String paperApplyGrade;
+
     private String paperApplyClass;
 
     @TableField(value = "create_time",fill = FieldFill.INSERT)
